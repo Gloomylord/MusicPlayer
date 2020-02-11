@@ -1,0 +1,65 @@
+:root {
+  --main-bg-color: #4d7a98;
+  --main-table-color:  rgb(16, 77, 113);
+}
+.mb-3{
+  margin-bottom: 10px;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.flexelement {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.main{
+  flex-grow: 1;
+}
+
+.App-header {
+  background-color:var(--main-bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+  margin: 20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.button{
+  background-color: var(--main-bg-color);
+  font-size: 30px;
+  border: 2px solid cornflowerblue;
+  color: #ffffff;
+  padding: 10px;
+}
+.childrad :first-child{
+  border-top-left-radius: 7px;
+}
+.childrad :last-child{
+  border-top-right-radius: 7px;
+}
+

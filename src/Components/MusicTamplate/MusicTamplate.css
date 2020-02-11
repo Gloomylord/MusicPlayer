@@ -1,0 +1,120 @@
+.time {
+    color: #ffffff;
+}
+
+.flexelement {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+.musicList {
+    width: 600px;
+}
+
+.borderList {
+    padding: 5px;
+    border: 2px solid cornflowerblue;
+    background-color: var(--main-bg-color);
+}
+
+.btn {
+    outline: none;
+    align-self: center;
+    background-color: var(--main-bg-color);
+    border: 0px solid cornflowerblue;
+    color: #ffffff;
+}
+
+.divcenter {
+    outline: none;
+    align-self: center;
+}
+
+.btn-menu {
+    outline: none;
+    font-size: 20px;
+}
+
+.musicName {
+    outline: none;
+    font-size: 18px;
+}
+
+.time {
+    outline: none;
+    opacity: 0.9;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.name {
+    outline: none;
+    font-size: 13px;
+}
+
+.l {
+    outline: none;
+    margin-left: auto;
+}
+
+.mal {
+    outline: none;
+    margin-left: 10px;
+}
+.stophover:hover :first-child{
+    background-color: aqua;
+}
+.stophover:hover :last-child{
+    background-color: aqua;
+}
+.divstop1 {
+    outline: none;
+    height: 12px;
+    width: 11px;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+.divstop2 {
+    outline: none;
+    height: 12px;
+    width: 10px;
+}
+
+.divm {
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    width: 13.5px;
+}
+.btndown{
+    background-color: var(--main-table-color);
+}
+.btnup{
+    background-color: var(--main-bg-color);
+}
+.borderRadius > :first-child{
+    border-top-right-radius: 10px;
+    border-top-left-radius:  10px;
+}
+.borderRadius > :last-child{
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius:  10px;
+}
+.deletefont{
+    margin-left: 6px;
+    margin-top: 2px;
+    margin-right: 6px;
+    font-size: 15px !important;
+}
+.namber{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+
+
+

@@ -1,0 +1,39 @@
+.text{
+    color: #dedfe3;
+}
+.flexelement{
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+.column{
+    flex-direction: column;
+}
+.leftblock{
+    flex-grow: 0;
+    background-color: #282c34;
+    padding: 20px;
+}
+.title{
+    margin-top: 20px;
+    font-size: 20px;
+}
+.list{
+    margin-top:5px;
+}
+.choice{
+    font-size: 30px;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+.toppadding{
+    padding-top: 70px;
+}
+.widthleftdlock{
+    width: 15%;
+}
+.accentuation:hover{
+    color: aqua;
+}

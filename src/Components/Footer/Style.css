@@ -1,0 +1,198 @@
+.footer{
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0.8;
+    height: 60px;
+    background-color: white;
+    transition: bottom 0.5s;
+
+}
+.footermain{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.imgfooter{
+    font-size: 40px;
+}
+.mat{
+    margin-top: 5px;
+}
+.footerflex{
+    justify-content: space-between;
+}
+.footerrigth{
+    margin-right: 30px;
+}
+.footerleft{
+    margin-left: 30px;
+}
+.footerbtn{
+    justify-content: space-around;
+}
+.circle{
+    height: 30px;
+    width: 30px;
+    border: 3px solid darkblue;
+    border-radius: 300px;
+}
+.divstop{
+    outline: none;
+    height: 12px;
+    width: 11px;
+    background-color: darkblue;
+    border-radius: 2px;
+}
+.triangleleft{
+    font-size: 20px;
+    border-left: 5px solid darkblue ;
+}
+.trianglerigth{
+    font-size: 20px;
+    border-right: 5px solid darkblue ;
+}
+.colorneed{
+   color: darkblue;
+}
+.pointer{
+    cursor: pointer;
+}
+.none{
+    display: none;
+}
+.leftwidth{
+    width: 45%;
+}
+.sound{
+    margin-left: 5px;
+    height: 3px;
+    border: 1px solid black;
+    width: 60px;
+    border-radius: 4px;
+}
+.soundvelue{
+    height: 100%;
+    width: 50%;
+    background-color: darkblue;
+}
+.footermedia{
+    color: darkblue ;
+}
+.soundmedia{
+    margin-top: 6px;
+}
+.botmedia{
+    margin-top: 4px;
+    font-size: 15px !important;
+}
+.ml1{
+    margin-left: 10px;
+}
+.mr1{
+    margin-right: 10px;
+}
+.ml2{
+    margin-left: 20px;
+}
+.mr2{
+    margin-right: 20px;
+}
+.musicprogres{
+    height: 100%;
+    background-color: #3300ff;
+    justify-content: end;
+}
+.progres{
+    position: relative;
+    margin-bottom: 2px;
+    height: 3px;
+    width: 100%;
+    border: #116ecd solid 1px;
+}
+.width1{
+    width: 55%;
+}
+.progrescircle{
+    background-color: #3300ff;
+    height: 11px;
+    width: 11px;
+    border-radius: 20px;
+    position: absolute;
+    bottom: -3px;
+    display: none;
+}
+.soundCircle{
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    border-radius: 10px;
+    display: none;
+    background-color: darkblue;
+}
+.sound:hover .soundCircle{
+    display:  block;
+}
+.progres:hover .progrescircle{
+    display: block;
+}
+.progres:hover{
+    height: 5px;
+    margin-bottom: 0px;
+}
+.soundveluepos{
+    position: relative;
+    tip:0px;
+    left:0px
+}
+.btnfooter{
+    border:2px solid #00A0EC;
+    border-bottom: 0px solid white;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px;
+    background-color: white;
+    height: 40px;
+    position: fixed;
+    right: 25px;
+    color: darkblue;
+    transition: bottom 1s;
+
+}
+.btnfooter > i {
+    margin: 5px;
+}
+.change-color :hover{
+    color: #009ed5 ;
+}
+.circle:hover{
+    height: 30px;
+    width: 30px;
+    border-radius: 300px;
+    border: 3px solid #009ed5;
+    color: #009ed5;
+}
+.circle:hover > div{
+    color: #009ed5 !important;
+}
+.circle:hover > div > :first-child{
+    background-color: #009ed5;
+}
+.circle:hover > div > :last-child{
+    background-color: #009ed5;
+}
+.soundnam{
+    display: none;
+    background-color: #00fffc;
+    opacity: 0.5;
+    border-radius: 5px;
+    border: black solid 1px;
+    position: absolute;
+    bottom: 10px;
+    padding: 2px;
+    font-size: 13px;
+    color: #3300ff;
+}
+.rel{
+    position: relative;
+}
