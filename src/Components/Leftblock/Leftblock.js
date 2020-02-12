@@ -6,7 +6,6 @@ import {inject, observer} from "mobx-react";
 
 
 class Leftblock extends Component {
-
     render() {
         return (
             <div className="leftblock flexelement column toppadding widthleftdlock">

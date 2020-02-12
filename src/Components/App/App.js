@@ -25,6 +25,7 @@ class App extends Component {
         isHandle: false,
         mouseDown: false,
         musicDisplay: false,
+        length: 0
     };
     changeMusic = (id) => {
         this.setState({selectedMusic: id});
@@ -32,10 +33,16 @@ class App extends Component {
     musicadd = (some) => {
         some.id = some.id
         playlist.add(some);
+        this.setState({
+            length: this.length + 1
+        })
     };
     musicdel = (some) => {
         playlist.delete(some);
         this.props.mainStore.changeList(Array.from(playlist));
+        this.setState({
+            length: this.length - 1
+        })
     }
     changeInfo = async (info) => {
         await this.setState({
@@ -362,12 +369,14 @@ class App extends Component {
             }
         }
     };
-    playsome = (namber) => {
+    playsome = (id) => {
         this.props.mainStore.footerShowtrue();
-        if (this.state.musicInfo) {
+        this.footerDisplay();
+
+        
             let some;
             playlist.forEach((value, valueAgain, set) => {
-                if (value.namber == namber) {
+                if (value.id == id) {
                     this.setState({
                         musicInfo: value
                     });
@@ -390,7 +399,7 @@ class App extends Component {
                     this.handleOnclick();
                 }
             }
-        }
+
     };
 
     render() {

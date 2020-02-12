@@ -3,11 +3,11 @@ import {inject, observer} from "mobx-react";
 
 
 class Some extends Component {
-    state = {
-        namber: this.props.some.namber
-    };
+    state ={
+        id: this.props.some.id
+    }
     playsome = () => {
-        this.props.playsome(this.state.namber);
+        this.props.playsome(this.state.id);
     };
 
     render() {
