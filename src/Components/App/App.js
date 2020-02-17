@@ -1,14 +1,14 @@
 import './App.css';
 import '../MusicTamplate/MusicTamplate';
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import List from "../List";
-import Leftblock from "../Leftblock/Leftblock";
+import Leftblock from "../Leftblock/LeftBlock";
 import Footer from "../Footer/Footer";
 import Header from "../header/Header";
-import MusicTamplate from "../MusicTamplate/MusicTamplate";
 import {inject, observer} from "mobx-react";
-
-let playlist = new Set();
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import AddForm from "../AddForm/AddForm";
 
 class App extends Component {
     playerRef = React.createRef();
@@ -17,37 +17,33 @@ class App extends Component {
         isProsses: false,
         musicInfo: null,
         sound: true,
-        soundvolume: 0.5,
+        soundVolume: 0.5,
         list: 'Popular',
+        playlist: [],
         loop: false,
         time: '',
         selectedMusic: null,
         isHandle: false,
         mouseDown: false,
         musicDisplay: false,
-        length: 0
     };
     changeMusic = (id) => {
-        this.setState({selectedMusic: id});
+        if (id) {
+            this.setState({selectedMusic: id});
+        }
     };
-    musicadd = (some) => {
-        some.id = some.id
-        playlist.add(some);
-        this.setState({
-            length: this.length + 1
-        })
+    addMusic = (some) => {
     };
-    musicdel = (some) => {
-        playlist.delete(some);
-        this.props.mainStore.changeList(Array.from(playlist));
-        this.setState({
-            length: this.length - 1
-        })
-    }
+
+    deleteMusic = (some) => {
+        this.props.mainStore.changeList('playlist');
+    };
     changeInfo = async (info) => {
-        await this.setState({
-            musicInfo: info
-        });
+        if (info) {
+            await this.setState({
+                musicInfo: info
+            });
+        }
     };
     popularList = async (list) => {
         await this.props.mainStore.changeList('Popular');
@@ -56,9 +52,9 @@ class App extends Component {
         })
     };
     playList = async (list) => {
-        this.props.mainStore.changeList(Array.from(playlist));
+        this.props.mainStore.changeList('playlist');
         await this.setState({
-            list: 'PlayList'
+            list: 'playlist'
         })
     };
     changeSoundVolumeClick = (e) => {
@@ -80,7 +76,7 @@ class App extends Component {
             }
             this.playerRef.current.volume = a;
             this.setState({
-                soundvolume: a
+                soundVolume: a
             })
         }
     };
@@ -94,24 +90,28 @@ class App extends Component {
         if (this.state.sound) {
             this.playerRef.current.volume = 0;
         } else {
-            this.playerRef.current.volume = this.state.soundvolume;
+            this.playerRef.current.volume = this.state.soundVolume;
         }
-        if (!(this.state.soundvolume == 0)) {
+        if (!(this.state.soundVolume == 0)) {
             this.setState({
                 sound: !this.state.sound
             })
         }
     };
     handleOnclick = () => {
-        this.playerRef.current.value = this.state.soundvolume;
-        this.progresshandle();
+        this.playerRef.current.value = this.state.soundVolume;
+        this.progressHandle();
         if (this.state.isProsses) {
             this.playerRef.current.pause();
             this.setState({
                 isProsses: !this.state.isProsses
             })
         } else {
-            this.playerRef.current.play();
+            this.playerRef.current.play().then(() => {
+                console.log('Playing...')
+            }).catch((err) => {
+                console.log('error...', err)
+            });
             this.setState({
                 isProsses: !this.state.isProsses
             })
@@ -122,7 +122,7 @@ class App extends Component {
             musicDisplay: true
         })
     };
-    imrandom = () => {
+    randomMusic = () => {
         if (this.state.musicInfo) {
             let namber = Math.round((this.props.mainStore.list.length) * Math.random() - 1 / 2);
             let some = this.props.mainStore.list[namber];
@@ -134,7 +134,11 @@ class App extends Component {
                         this.handleOnclick();
                     }
                     this.changeMusic(some.id);
-                    this.playerRef.current.play();
+                    this.playerRef.current.play().then(() => {
+                        console.log('Playing...')
+                    }).catch((err) => {
+                        console.log('error...', err)
+                    });
                     this.setState({
                         isProsses: true
                     })
@@ -150,7 +154,7 @@ class App extends Component {
         });
         this.playerRef.current.loop = !this.playerRef.current.loop;
     };
-    progresshandle = () => {
+    progressHandle = () => {
         let player = this.playerRef.current;
         if (!this.state.isHandle) {
             this.setState({
@@ -196,7 +200,6 @@ class App extends Component {
                 let playerpos = event.clientX / document.documentElement.clientWidth;
                 let shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
-
                 let onMouseMove = (event) => {
                     let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
                     if (newLeft < 0) {
@@ -214,13 +217,16 @@ class App extends Component {
                     progress.style.width = event.clientX / document.documentElement.clientWidth * 100 + '%';
                 };
 
-
                 let onMouseUp = () => {
                     ple.currentTime = playerpos * ple.duration;
                     document.removeEventListener('mouseup', onMouseUp);
                     document.removeEventListener('mousemove', onMouseMove);
                     if (!p) {
-                        ple.play();
+                        ple.play().then(() => {
+                            console.log('Playing...')
+                        }).catch((err) => {
+                            console.log('error...', err)
+                        });
                     }
                 };
                 document.addEventListener('mousemove', onMouseMove);
@@ -234,7 +240,7 @@ class App extends Component {
 
             let soundCircle = document.getElementById('soundCircle');
             let sound = document.getElementById('sound');
-            let soundvolume = document.getElementById('soundvolume');
+            let soundVolume = document.getElementById('soundvolume');
             let soundnam = document.getElementById('soundnam');
             soundCircle.onmousedown = (event) => {
                 event.preventDefault();
@@ -243,7 +249,7 @@ class App extends Component {
 
                 let onMouseMove1 = (event) => {
                     soundnam.style.display = 'block';
-                    let newLeft = event.clientX - shiftX - sound.getBoundingClientRect().left ;
+                    let newLeft = event.clientX - shiftX - sound.getBoundingClientRect().left;
 
                     if (newLeft < 0) {
                         newLeft = 0;
@@ -255,9 +261,9 @@ class App extends Component {
                     }
                     ple.volume = newLeft / 60;
                     this.setState({
-                        soundvolume: ple.volume
+                        soundVolume: ple.volume
                     });
-                    if (this.state.soundvolume == 0) {
+                    if (this.state.soundVolume == 0) {
                         this.setState({
                             sound: false
                         })
@@ -266,8 +272,8 @@ class App extends Component {
                             sound: true
                         })
                     }
-                    soundvolume.style.width = ple.volume * 100 + '%';
-                    soundnam.style.left = (newLeft - soundnam.offsetWidth/2) + 'px';
+                    soundVolume.style.width = ple.volume * 100 + '%';
+                    soundnam.style.left = (newLeft - soundnam.offsetWidth / 2) + 'px';
                     soundCircle.style.left = (newLeft - 5) + 'px';
                 };
 
@@ -331,67 +337,11 @@ class App extends Component {
                         this.handleOnclick();
                     }
                     this.changeMusic(some.id);
-                    this.playerRef.current.play();
-                    this.setState({
-                        isProsses: true
-                    })
-                } else {
-                    this.handleOnclick();
-                }
-            }
-        }
-    };
-    previous = () => {
-        if (this.state.musicInfo) {
-            let some;
-            let namber;
-            this.props.mainStore.list.forEach((value, index) => {
-                if (this.state.selectedMusic == value.id) {
-                    namber = index;
-                }
-            });
-            some = this.props.mainStore.list[namber - 1];
-            if (some) {
-                if (!(this.selectedMusic === some.id)) {
-                    this.playerRef.current.pause();
-                    this.playerRef.current.src = some.url;
-                    if (!this.isProsses) {
-                        this.handleOnclick();
-                    }
-                    this.changeMusic(some.id);
-                    this.playerRef.current.play();
-                    this.setState({
-                        isProsses: true
-                    })
-                } else {
-                    this.handleOnclick();
-                }
-            }
-        }
-    };
-    playsome = (id) => {
-        this.props.mainStore.footerShowtrue();
-        this.footerDisplay();
-
-        
-            let some;
-            playlist.forEach((value, valueAgain, set) => {
-                if (value.id == id) {
-                    this.setState({
-                        musicInfo: value
+                    this.playerRef.current.play().then(() => {
+                        console.log('Playing...')
+                    }).catch((err) => {
+                        console.log('error...', err)
                     });
-                    some = value;
-                }
-            });
-            if (some) {
-                if (!(this.selectedMusic === some.id)) {
-                    this.playerRef.current.pause();
-                    this.playerRef.current.src = some.url;
-                    if (!this.isProsses) {
-                        this.handleOnclick();
-                    }
-                    this.changeMusic(some.id);
-                    this.playerRef.current.play();
                     this.setState({
                         isProsses: true
                     })
@@ -399,75 +349,108 @@ class App extends Component {
                     this.handleOnclick();
                 }
             }
-
+        }
     };
+    playSome = (id) => {
+        this.props.mainStore.footerShowTrue();
+        this.footerDisplay();
+        let some;
+        if (some) {
+            if (!(this.selectedMusic === some.id)) {
+                this.playerRef.current.pause();
+                this.playerRef.current.src = some.url;
+                if (!this.isProsses) {
+                    this.handleOnclick();
+                }
+                this.changeMusic(some.id);
+                this.playerRef.current.play().then(() => {
+                    console.log('Playing...')
+                }).catch((err) => {
+                    console.log('error...', err)
+                });
+                this.setState({
+                    isProsses: true
+                })
+            } else {
+                this.handleOnclick();
+            }
+        }
+    };
+    message=(str)=>{
+        toast.info(str, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+    }
 
     render() {
-        return <div>
-            <Header/>
-            <div className="flexelement row">
-                <Leftblock some={Array.from(playlist)}
-                           playsome={this.playsome}
-                />
-                <div className="App main">
-                    <div className="App-header">
-                        <div className='childrad'>
-                            <button
-                                className={'button ' + ((this.state.list === 'PlayList') ? 'btndown' : 'btnup')}
-                                onClick={this.playList}
-                            >PlayList
-                            </button>
-                            <button
-                                className={'button ' + ((this.state.list === 'Popular') ? 'btndown' : 'btnup')}
-                                onClick={this.popularList}
-                            >Popular
-                            </button>
-                            <button
-                                className={'button ' + ((this.state.list === 'myList') ? 'btndown' : 'btnup')}
-                                onClick={this.myList}
-                            >My list
-                            </button>
+        return <Fragment>
+            <div className={'' + (this.props.mainStore.modal ? 'soup' : '')}>
+                <Header/>
+                <div className="flexelement row">
+                    <Leftblock some={this.props.mainStore.playlist}
+                               playSome={this.playSome}
+                    />
+                    <div className="App main">
+                        <div className="App-header">
+                            <div className='childrad'>
+                                <button
+                                    className={'button ' + ((this.state.list === 'PlayList') ? 'btndown' : 'btnup')}
+                                    onClick={this.playList}
+                                >PlayList
+                                </button>
+                                <button
+                                    className={'button ' + ((this.state.list === 'Popular') ? 'btndown' : 'btnup')}
+                                    onClick={this.popularList}
+                                >Popular
+                                </button>
+                                <button
+                                    className={'button ' + ((this.state.list === 'myList') ? 'btndown' : 'btnup')}
+                                    onClick={this.myList}
+                                >My list
+                                </button>
+                            </div>
+                            <List playerRef={this.playerRef}
+                                  selectedMusic={this.state.selectedMusic}
+                                  changeMusic={this.changeMusic}
+                                  handleOnclick={this.handleOnclick}
+                                  isProsses={this.state.isProsses}
+                                  musicInfo={this.state.musicInfo}
+                                  changeInfo={this.changeInfo}
+                                  footerDisplay={this.footerDisplay}
+                                  list={this.props.mainStore.list}
+                                  chooselist={this.state.list}
+                                  state={this.state}
+                                  addMusic={this.addMusic}
+                                  deleteMusic={this.deleteMusic}
+                                  message={this.message}
+                            />
+                            <audio ref={this.playerRef} id="player" src="/music/taylor-swift-love-story.mp3"
+                                   type="audio/mpeg"></audio>
                         </div>
-                        <List playerRef={this.playerRef}
-                              selectedMusic={this.state.selectedMusic}
-                              changeMusic={this.changeMusic}
-                              handleOnclick={this.handleOnclick}
-                              isProsses={this.state.isProsses}
-                              musicInfo={this.state.musicInfo}
-                              changeInfo={this.changeInfo}
-                              footerDisplay={this.footerDisplay}
-                              list={this.props.mainStore.list}
-                              chooselist={this.state.list}
-                              state={this.state}
-                              some={Array.from(playlist)}
-                              musicadd={this.musicadd}
-                              musicdel={this.musicdel}
-                        />
-                        <audio ref={this.playerRef} id="player" src="/music/taylor-swift-love-story.mp3"
-                               type="audio/mp3"></audio>
                     </div>
                 </div>
+                <div className={'flexelement btnfooter '+(this.props.mainStore.modal?'none':'')}
+                     style={{bottom: !this.props.mainStore.footerShow ? '0px' : "-60px"}}
+                >
+                    <i className="im im-care-up divcenter pointer"
+                       onClick={this.props.mainStore.footerShowTrue}></i>
+                </div>
+                <Footer ref={this.footerRef}
+                        mainState={this.state}
+                        handleOnclick={this.handleOnclick}
+                        soundClick={this.sound}
+                        loop={this.loop}
+                        playerRef={this.playerRef}
+                        changeProgress={this.changeProgress}
+                        changeSoundVolume={this.changeSoundVolumeClick}
+                        next={this.next}
+                        previous={this.previous}
+                        randomMusic={this.randomMusic}
+                />
             </div>
-            <div className='flexelement btnfooter'
-                 style={{bottom: !this.props.mainStore.footerShow ? '0px' : "-60px"}}
-            >
-                <i className="im im-care-up divcenter pointer"
-                   onClick={this.props.mainStore.footerShowtrue}></i>
-            </div>
-            <Footer ref={this.footerRef}
-                    mainState={this.state}
-                    handleOnclick={this.handleOnclick}
-                    soundclick={this.sound}
-                    loop={this.loop}
-                    playerRef={this.playerRef}
-                    changeProgress={this.changeProgress}
-                    changeSoundVolume={this.changeSoundVolumeClick}
-                    next={this.next}
-                    previous={this.previous}
-                    imrandom={this.imrandom}
-            />
-
-        </div>
+            {this.props.mainStore.modal ? <AddForm/> : ''}
+            <ToastContainer />
+        </Fragment>
     }
 }
 

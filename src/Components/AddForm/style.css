@@ -1,0 +1,66 @@
+.modal{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modalValue{
+    background-color: #2a3754;
+    width: 450px;
+    border: solid 3px #03065c;
+    border-radius: 5px;
+    padding: 10px;
+}
+.inputAll{
+    background-color: #8fc7ff;
+    border-radius: 6px;
+    border: solid 2px #3485ed;
+    margin: 10px;
+    padding: 4px;
+    color: #282c34;
+}
+.txt{
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: var(--main-text-color);
+}
+.inputTitle{
+    color: var(--main-text-color);
+    font-size: 20px;
+    margin-left: 20px;
+}
+.inputText{
+    width: 250px;
+    height: 30px;
+    margin-right: 20px;
+}
+.flet{
+    justify-content: space-between;
+}
+.flet1{
+    justify-content: space-around;
+}
+.inputFile{
+    display: flex;
+    justify-content: center;
+}
+.inputBtn{
+    width: 100px;
+    padding: 8px;
+    font-size: 20px;
+}
+.divInput{
+    width: 100%;
+}
+.close{
+    width: 100%;
+    justify-content: end;
+}
+.closeBtn{
+    font-size: 20px !important;
+    color: var(--main-text-color);
+}

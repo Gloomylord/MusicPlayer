@@ -5,7 +5,7 @@ import {inject, observer} from "mobx-react";
 
 
 
-class Leftblock extends Component {
+class LeftBlock extends Component {
     render() {
         return (
             <div className="leftblock flexelement column toppadding widthleftdlock">
@@ -17,11 +17,11 @@ class Leftblock extends Component {
                 <div className='text list'>Songs</div>
                 <div className="title text">PLAYLIST &#10010;</div>
                 <Playlist some={this.props.some}
-                          playsome={this.props.playsome}
+                          playSome={this.props.playSome}
                 />
             </div>
         )
     }
 }
 
-export default inject("mainStore")(observer(Leftblock));
+export default inject("mainStore")(observer(LeftBlock));

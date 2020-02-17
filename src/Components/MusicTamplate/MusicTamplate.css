@@ -10,11 +10,12 @@
     flex-direction: row;
 }
 .musicList {
-    width: 600px;
+    width: 700px;
 }
 
 .borderList {
-    padding: 5px;
+    box-shadow: white 3px 3px 5px;
+    padding: 8px;
     border: 2px solid cornflowerblue;
     background-color: var(--main-bg-color);
 }
@@ -24,11 +25,10 @@
     align-self: center;
     background-color: var(--main-bg-color);
     border: 0px solid cornflowerblue;
-    color: #ffffff;
+    color: var(--main-text-color);
 }
 
 .divcenter {
-    outline: none;
     align-self: center;
 }
 
@@ -46,7 +46,7 @@
     outline: none;
     opacity: 0.9;
     font-size: 15px;
-    color: #ffffff;
+    color: var(--main-text-color);
 }
 
 .name {
@@ -73,7 +73,7 @@
     outline: none;
     height: 12px;
     width: 11px;
-    background-color: #ffffff;
+    background-color: var(--main-text-color);
     border-radius: 2px;
 }
 

@@ -16,7 +16,7 @@ class CenterPartFooter extends Component {
         return <div className='divcenter flexelement row '>
             <div className='divcenter flexelement change-color'><i
                 className="im im-random pointer footermedia botmedia divcenter mr2 "
-                onClick={this.props.imrandom}
+                onClick={this.props.randomMusic}
             ></i></div>
             <div className='divcenter flexelement change-color'>
                 <i className="im im-previous pointer footermedia botmedia divcenter mr1 "

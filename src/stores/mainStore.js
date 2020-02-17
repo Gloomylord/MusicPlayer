@@ -1,68 +1,89 @@
 import {action, observable, decorate} from 'mobx';
-import myMusic from "../Components/myMusic";
-import musicList from "../Components/musicList";
 
-let my = myMusic;
-let musicL = musicList;
+let musicL = [];
+let inquiry = async () => {
+    let response = await fetch('/api/article', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({list: 'Popular'})
+    });
+    let start = await response.json();
+    if (start.mass) {
+        musicL = start.mass;
+    }
+    console.log('start:', start.mass);
+};
+
+inquiry().then(result => console.log('resalt:', result));
 
 class MainStore {
     show = false;
     footerShow = true;
     list = musicL;
-    listname = 'Popular';
+    listName = 'Popular';
+    modal = false;
+    playlist = [];
     toggleLeftPanel = () => {
         this.show = !this.show;
     };
-    footerShowtrue = () => {
+    showModal = () => {
+        this.modal = !this.modal;
+    }
+    footerShowTrue = () => {
         this.footerShow = true;
     };
-    footerShowfalse = () => {
+    footerShowFalse = () => {
         this.footerShow = false;
     };
-    changeList = (str) => {
-        if (str == 'Popular') {
-            this.list = musicL;
-            this.listname = 'Popular';
-        } else {
-            if (str == 'myList') {
-                this.listname = 'myList';
-                this.list = my;
-            } else {
-                this.listname = 'PlayList';
-                this.list = str;
-            }
+    changeList = async (str) => {
+        let response = await fetch('/api/article', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({list: str})
+        });
+        let start = await response.json();
+        if (start.mass) {
+            this.list = start.mass;
+            this.listName = str;
         }
+        console.log('start:', start.mass);
     };
 
-    musicadd = (id) => {
-        let some;
+    addMusic = async (id) => {
         this.list.forEach((value, index) => {
             if (value.id == id) {
-                some = index;
-                this.list[index].isAdd = true
+                this.list[index].isAdd = true;
             }
+        })
+        let response = await fetch('/api/isAdd', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id: id, isAdd: true})
         });
-        if (this.listname == "Popular") {
-            musicL[some].isAdd = true;
-        }
-        if (this.listname == "myList") {
-            my[some].isAdd = true;
-        }
+        let start = await response.json();
+        console.log('start:', start.isAdd);
     }
-    musicdel = (id) =>{
-        console.log('start');
-        let some;
-        musicL.forEach((value, index) => {
+    deleteMusic = async (id) => {
+        this.list.forEach((value, index) => {
             if (value.id == id) {
-                musicL[index].isAdd = false
-            }
-
-        });
-        my.forEach((value, index) => {
-            if (value.id == id) {
-                my[index].isAdd = false
+                this.list.splice(index,1);
             }
         });
+        let response = await fetch('/api/isAdd', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id: id, isAdd: false})
+        });
+        let start = await response.json();
+        console.log('start:', start.isAdd);
     }
 };
 
@@ -70,11 +91,14 @@ decorate(MainStore, {
     show: observable,
     footerShow: observable,
     list: observable,
+    modal: observable,
+    showModal: action,
     toggleLeftPanel: action,
-    footerShowfalse: action,
-    footerShowtrue: action,
+    footerShowFalse: action,
+    footerShowTrue: action,
     changeList: action,
-
+    deleteMusic: action,
+    addMusic: action,
 });
 
 const mainStore = new MainStore();

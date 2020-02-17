@@ -4,7 +4,7 @@ export default [
         time: "2:54",
         musicName: "Minutes Til Midnight",
         authorName: "Drifters",
-        url: "/music/Minutes Til Midnight - Drifters .mp3"
+        url: "/music/Minutes_Ti_ Midnight-Drifters.mp3"
     },
     {
         id: "dft3t2",

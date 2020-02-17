@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import MusicTamplate from './MusicTamplate/MusicTamplate';
-import musicList from "./musicList";
-import myMusic from "./myMusic";
 import {inject, observer} from "mobx-react";
 
 class List extends Component {
 
     render() {
+
         let finalList;
         if (!(this.props.mainStore.list.length === 0)) {
             finalList = this.props.mainStore.list.map((some,index) => <MusicTamplate
@@ -22,8 +21,9 @@ class List extends Component {
                 list={this.props.state.list}
                 changeInfo={this.props.changeInfo}
                 footerDisplay={this.props.footerDisplay}
-                musicadd={this.props.musicadd}
-                musicdel={this.props.musicdel}
+                addMusic={this.props.addMusic}
+                deleteMusic={this.props.deleteMusic}
+                message={this.props.message}
             />);
         } else {
             finalList = <div key={this.props.list} className='flexelement row musicList borderList'>

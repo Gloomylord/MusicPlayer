@@ -25,13 +25,13 @@ export default [
         time:"1:58" ,
         musicName: "PATATATATA",
         authorName: "MORGENSHTERN",
-        url: "/music/Morgenshtern - РАТАТАТАТА.mp3"
+        url: "/music/Morgenshtern.mp3"
     },
     {
         id: "c245c36434",
         time: "3:14",
         musicName: "Funeral",
         authorName:"Lil Wayne",
-        url: "/music/Lil Wayne - Funeral.mp3"
+        url: "/music/1.mp3"
     }
 ];

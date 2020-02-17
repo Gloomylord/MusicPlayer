@@ -43,14 +43,14 @@ class Footer extends Component {
     render() {
         let sondon = <i
             className="im im-volume divcenter pointer footermedia soundmedia"
-            onClick={this.props.soundclick}></i>;
+            onClick={this.props.soundClick}></i>;
         let soundoff = <i
             className="im im-volume-off divcenter pointer footermedia soundmedia"
-            onClick={this.props.soundclick}
+            onClick={this.props.soundClick}
         ></i>
 
-        return < div id='footer'
-                     className={'footer footerflex column ' + (!(this.props.mainState.musicDisplay) ? 'none ' : "flexelement ")}
+        return <div  id='footer'
+                     className={'footer footerflex column ' + (!(this.props.mainState.musicDisplay) ? 'none ' : "flexelement ")+(this.props.mainStore.modal?'none':'')}
                      style={{bottom: this.props.mainStore.footerShow ? '0px' : "-60px"}}
         >
             <div id='slider' className='progres pointer' onClick={this.props.changeProgress}>
@@ -71,7 +71,7 @@ class Footer extends Component {
                         loop={this.props.loop}
                         isLoop={this.props.mainState.loop}
                         previous={this.props.previous}
-                        imrandom={this.props.imrandom}
+                        randomMusic={this.props.randomMusic}
                     />
                     <div className='divcenter footerrigth flexelement row'>
                         <div className='divcenter footerrigth flexelement row'>
@@ -87,21 +87,21 @@ class Footer extends Component {
                              onClick={this.props.changeSoundVolume}
                         >
                             <div id='soundnam' className='soundnam'>
-                                {Math.round(this.props.mainState.soundvolume * 100)+'%'}
+                                {Math.round(this.props.mainState.soundVolume * 100)+'%'}
                             </div>
                             <div id='soundvolume' className='soundvelue divcenter soundveluepos'
                                  style={(!this.props.mainState.sound) ? {display: 'none'} : {
                                      display: 'flex',
-                                     width: this.props.mainState.soundvolume * 100 + '%'
+                                     width: this.props.mainState.soundVolume * 100 + '%'
                                  }}
                             >
                                 <div id='soundCircle' className='soundCircle divcenter'
-                                     style={{left: this.props.mainState.soundvolume * 60 - 6 + 'px'}}
+                                     style={{left: this.props.mainState.soundVolume * 60 - 6 + 'px'}}
                                 ></div>
                             </div>
                         </div>
                         <i className="im im-care-down divcenter pointer footermedia soundmedia ml2"
-                           onClick={this.props.mainStore.footerShowfalse}
+                           onClick={this.props.mainStore.footerShowFalse}
                         ></i>
                     </div>
                 </div>
