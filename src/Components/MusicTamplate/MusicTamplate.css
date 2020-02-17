@@ -10,11 +10,14 @@
     flex-direction: row;
 }
 .musicList {
-    width: 700px;
+    width: auto;
 }
-
+.scroll{
+    overflow: auto;
+    max-height:300px ;
+}
 .borderList {
-    box-shadow: white 3px 3px 5px;
+
     padding: 8px;
     border: 2px solid cornflowerblue;
     background-color: var(--main-bg-color);
@@ -95,6 +98,11 @@
 .btnup{
     background-color: var(--main-bg-color);
 }
+.borderRadius{
+    width: 700px;
+    box-shadow: white 3px 3px 5px;
+    border-radius: 10px;
+}
 .borderRadius > :first-child{
     border-top-right-radius: 10px;
     border-top-left-radius:  10px;
@@ -113,6 +121,9 @@
     margin-left: 10px;
     margin-right: 10px;
     font-size: 13px;
+}
+.minHeigth{
+    min-height: 250px;
 }
 
 

@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import Header from "../header/Header";
 import {inject, observer} from "mobx-react";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import AddForm from "../AddForm/AddForm";
 
 class App extends Component {
@@ -31,12 +31,6 @@ class App extends Component {
         if (id) {
             this.setState({selectedMusic: id});
         }
-    };
-    addMusic = (some) => {
-    };
-
-    deleteMusic = (some) => {
-        this.props.mainStore.changeList('playlist');
     };
     changeInfo = async (info) => {
         if (info) {
@@ -311,6 +305,43 @@ class App extends Component {
         document.getElementById('progress').style.width = event.clientX / document.documentElement.clientWidth * 100 + '%';
         document.getElementById('progrescircle').style.left = event.clientX / document.documentElement.clientWidth * 100 + '%';
     };
+    previous = () => {
+        if (this.state.musicInfo) {
+            let some;
+            let namber;
+            this.props.mainStore.list.forEach((value, index) => {
+                if (this.state.selectedMusic == value.id) {
+                    some = this.props.mainStore.list[index - 1];
+                }
+            });
+            if (some) {
+                this.setState({
+                    musicInfo: some
+                });
+                if (!(this.selectedMusic === some.id)) {
+                    this.playerRef.current.pause();
+                    this.playerRef.current.src = some.url;
+                    this.setState({
+                        selectedMusic: some.id
+                    });
+                    if (!this.isProsses) {
+                        this.handleOnclick();
+                    }
+                    this.changeMusic(some.id);
+                    this.playerRef.current.play().then(() => {
+                        console.log('Playing...')
+                    }).catch((err) => {
+                        console.log('error...', err)
+                    });
+                    this.setState({
+                        isProsses: true
+                    })
+                } else {
+                    this.handleOnclick();
+                }
+            }
+        }
+    };
     next = () => {
         if (this.state.musicInfo) {
             let some;
@@ -351,32 +382,45 @@ class App extends Component {
             }
         }
     };
-    playSome = (id) => {
-        this.props.mainStore.footerShowTrue();
-        this.footerDisplay();
+    playSome = async (id) => {
         let some;
+        let response = await fetch('/api/some', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id: id})
+        });
+        let start = await response.json();
+        if (start.mass) {
+            some = start.mass[0];
+        }
+        if (start.message) {
+            toast.inf(start.message, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        }
         if (some) {
-            if (!(this.selectedMusic === some.id)) {
-                this.playerRef.current.pause();
-                this.playerRef.current.src = some.url;
-                if (!this.isProsses) {
-                    this.handleOnclick();
-                }
-                this.changeMusic(some.id);
-                this.playerRef.current.play().then(() => {
-                    console.log('Playing...')
-                }).catch((err) => {
-                    console.log('error...', err)
-                });
-                this.setState({
-                    isProsses: true
-                })
-            } else {
+            this.changeMusic(some.id);
+            this.changeInfo(some);
+            this.playerRef.current.pause();
+            this.playerRef.current.src = some.url;
+            if (!this.isProsses) {
                 this.handleOnclick();
             }
+            this.playerRef.current.play().then(() => {
+                console.log('Playing...')
+            }).catch((err) => {
+                console.log('error...', err)
+            });
+            this.setState({
+                isProsses: true
+            })
+            this.props.mainStore.footerShowTrue();
+            this.footerDisplay();
         }
     };
-    message=(str)=>{
+    message = (str) => {
         toast.info(str, {
             position: toast.POSITION.BOTTOM_RIGHT
         });
@@ -394,7 +438,7 @@ class App extends Component {
                         <div className="App-header">
                             <div className='childrad'>
                                 <button
-                                    className={'button ' + ((this.state.list === 'PlayList') ? 'btndown' : 'btnup')}
+                                    className={'button ' + ((this.state.list === 'playlist') ? 'btndown' : 'btnup')}
                                     onClick={this.playList}
                                 >PlayList
                                 </button>
@@ -420,8 +464,6 @@ class App extends Component {
                                   list={this.props.mainStore.list}
                                   chooselist={this.state.list}
                                   state={this.state}
-                                  addMusic={this.addMusic}
-                                  deleteMusic={this.deleteMusic}
                                   message={this.message}
                             />
                             <audio ref={this.playerRef} id="player" src="/music/taylor-swift-love-story.mp3"
@@ -429,7 +471,7 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={'flexelement btnfooter '+(this.props.mainStore.modal?'none':'')}
+                <div className={'flexelement btnfooter ' + (this.props.mainStore.modal ? 'none' : '')}
                      style={{bottom: !this.props.mainStore.footerShow ? '0px' : "-60px"}}
                 >
                     <i className="im im-care-up divcenter pointer"
@@ -449,7 +491,7 @@ class App extends Component {
                 />
             </div>
             {this.props.mainStore.modal ? <AddForm/> : ''}
-            <ToastContainer />
+            <ToastContainer/>
         </Fragment>
     }
 }

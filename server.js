@@ -60,6 +60,20 @@ app.post('/api/article', async function (req, res) {
         });
     }
 });
+app.post('/api/some', async function (req, res) {
+    let obj = {};
+    console.log('body: ', req.body.list);
+    if (req.body.id) {
+        await Music.findAll({where: {id: req.body.id}}).then(result => {
+            obj.mass = result;
+            res.json(obj);
+        });
+    } else {
+        console.log("ничего не нашлось");
+        obj.message = 'Такой музыки нет';
+        res.json(obj);
+    }
+});
 
 app.post('/api/addMusic', async function (req, res, next) {
     let obj = {};

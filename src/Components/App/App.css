@@ -23,6 +23,9 @@
 .flexelement {
   display: flex;
 }
+.jc-c{
+  justify-content: center;
+}
 
 .row {
   flex-direction: row;
@@ -65,7 +68,7 @@
   font-size: 30px;
   border: 2px solid cornflowerblue;
   color: var(--main-text-color);
-  padding: 10px;
+  padding: 10px 22px;
 }
 .childrad :first-child{
   border-top-left-radius: 7px;
@@ -73,5 +76,3 @@
 .childrad :last-child{
   border-top-right-radius: 7px;
 }
-
-

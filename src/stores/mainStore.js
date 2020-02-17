@@ -1,33 +1,28 @@
 import {action, observable, decorate} from 'mobx';
 
-let musicL = [];
-let inquiry = async () => {
-    let response = await fetch('/api/article', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({list: 'Popular'})
-    });
-    let start = await response.json();
-    if (start.mass) {
-        musicL = start.mass;
-    }
-    console.log('start:', start.mass);
-};
-
-inquiry().then(result => console.log('resalt:', result));
-
 class MainStore {
     show = false;
     footerShow = true;
-    list = musicL;
+    list = 'x';
     listName = 'Popular';
     modal = false;
     playlist = [];
     toggleLeftPanel = () => {
         this.show = !this.show;
     };
+    newPlaylist = async () => {
+        let response = await fetch('/api/article', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({list: 'playlist'})
+        });
+        let start = await response.json();
+        if (start.mass) {
+            this.playlist = start.mass;
+        }
+    }
     showModal = () => {
         this.modal = !this.modal;
     }
@@ -50,7 +45,6 @@ class MainStore {
             this.list = start.mass;
             this.listName = str;
         }
-        console.log('start:', start.mass);
     };
 
     addMusic = async (id) => {
@@ -67,14 +61,10 @@ class MainStore {
             body: JSON.stringify({id: id, isAdd: true})
         });
         let start = await response.json();
-        console.log('start:', start.isAdd);
+        this.newPlaylist();
+
     }
     deleteMusic = async (id) => {
-        this.list.forEach((value, index) => {
-            if (value.id == id) {
-                this.list.splice(index,1);
-            }
-        });
         let response = await fetch('/api/isAdd', {
             method: 'POST',
             headers: {
@@ -83,8 +73,15 @@ class MainStore {
             body: JSON.stringify({id: id, isAdd: false})
         });
         let start = await response.json();
-        console.log('start:', start.isAdd);
+        this.list.forEach((value, index) => {
+            if (value.id == id) {
+                this.list.splice(index,1);
+                this.playlist=this.list;
+            }
+        });
+
     }
+
 };
 
 decorate(MainStore, {
@@ -92,6 +89,7 @@ decorate(MainStore, {
     footerShow: observable,
     list: observable,
     modal: observable,
+    playlist: observable,
     showModal: action,
     toggleLeftPanel: action,
     footerShowFalse: action,
