@@ -14,18 +14,17 @@ const storageConfig = multer.diskStorage({
     }
 });
 const fileFilter = (req, file, cb) => {
-
     if (file.mimetype === "audio/mpeg" ||
         file.mimetype === "audio/mp3" ||
         req.body.musicName.length > 40) {
         cb(null, true);
     } else {
-        cb(null, false);
+        cb('Тип файла не подходит', false);
     }
 }
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(multer({storage: storageConfig}).single("music"));
+app.use(multer({storage: storageConfig,fileFilter: fileFilter}).single("music"));
 app.use(bodyParser.json());
 app.use(express.static('./static'));
 sequelize.sync().then(result => {

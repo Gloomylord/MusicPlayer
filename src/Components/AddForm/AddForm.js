@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {inject, observer} from "mobx-react";
 import './style.css'
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 
 class AddForm extends Component {
     state = {
-      input1color: false,
-      input3color: false
+        input1color: false,
+        input3color: false
     };
     maimElem = React.createRef();
     formElem = async (e) => {
@@ -20,15 +20,22 @@ class AddForm extends Component {
                 method: 'POST',
                 body: body
             });
-
-            let result = await response.json();
-            toast.error(result.message, {
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-            console.log(result);
+            try {
+                let result = await response.json();
+                toast.error(result.message, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+            } catch (err) {
+                if(err.name=='SyntaxError' || err.name=='TypeError'){
+                    toast.error('Тип файла не подходит, попробуйте mp3', {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }
+            }
         } else {
 
         }
+
 
     };
     hideModal = (e) => {
@@ -72,7 +79,7 @@ class AddForm extends Component {
                            required="required"/>
                 </div>
             </form>
-            <ToastContainer />
+            <ToastContainer/>
         </div>
     }
     ;
