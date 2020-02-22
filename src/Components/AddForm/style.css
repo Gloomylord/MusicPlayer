@@ -14,6 +14,8 @@
     border: solid 3px #03065c;
     border-radius: 5px;
     padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 .inputAll{
     background-color: #8fc7ff;
@@ -64,3 +66,11 @@
     font-size: 20px !important;
     color: var(--main-text-color);
 }
+.selectModal{
+    width: 262px;
+    background-color: #8fc7ff ;
+    border-radius: 5px;
+    padding: 6px;
+    margin-right: 17px;
+}
+

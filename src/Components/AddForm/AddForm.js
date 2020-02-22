@@ -26,7 +26,7 @@ class AddForm extends Component {
                     position: toast.POSITION.BOTTOM_RIGHT
                 });
             } catch (err) {
-                if(err.name=='SyntaxError' || err.name=='TypeError'){
+                if (err.name == 'SyntaxError' || err.name == 'TypeError') {
                     toast.error('Тип файла не подходит, попробуйте mp3', {
                         position: toast.POSITION.BOTTOM_RIGHT
                     });
@@ -69,6 +69,14 @@ class AddForm extends Component {
                     <div className='divcenter inputTitle'>Author Name:</div>
                     <input id='input2' className='inputAll inputText divcenter' type="text" name="authorName"
                            placeholder="AuthorName"/>
+                </div>
+                <div className='flexelement row divcenter flet1 divInput'>
+                    <div className='divcenter inputTitle'>Select Playlist:</div>
+                        <select className='divcenter inputAll selectModal'>
+                            <option value='Popular'>Popular</option>
+                            <option value='playlist'>PlayList</option>
+                            <option value='myList'>My List</option>
+                        </select>
                 </div>
                 <div className='divcenter flet flexelement divInput'>
                     <div className='divcenter inputTitle'>Select Music:</div>
