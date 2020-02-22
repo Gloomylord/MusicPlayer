@@ -22,9 +22,15 @@ class AddForm extends Component {
             });
             try {
                 let result = await response.json();
-                toast.error(result.message, {
-                    position: toast.POSITION.BOTTOM_RIGHT
-                });
+                if(result.message) {
+                    toast.info(result.message, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                } else {
+                    toast.error(result.a, {
+                        position: toast.POSITION.BOTTOM_RIGHT
+                    });
+                }
             } catch (err) {
                 if (err.name == 'SyntaxError' || err.name == 'TypeError') {
                     toast.error('Тип файла не подходит, попробуйте mp3', {
@@ -74,7 +80,6 @@ class AddForm extends Component {
                     <div className='divcenter inputTitle'>Select Playlist:</div>
                         <select className='divcenter inputAll selectModal'>
                             <option value='Popular'>Popular</option>
-                            <option value='playlist'>PlayList</option>
                             <option value='myList'>My List</option>
                         </select>
                 </div>

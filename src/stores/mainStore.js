@@ -6,7 +6,7 @@ class MainStore {
     list = 'x';
     listName = 'Popular';
     modal = false;
-    playlist = [];
+    playlist = null;
     toggleLeftPanel = () => {
         this.show = !this.show;
     };
@@ -19,8 +19,8 @@ class MainStore {
             body: JSON.stringify({list: 'playlist'})
         });
         let start = await response.json();
-        if (start.mass) {
-            this.playlist = start.mass;
+        if (start.musics) {
+            this.playlist = start.musics;
         }
     }
     showModal = () => {
@@ -41,8 +41,8 @@ class MainStore {
             body: JSON.stringify({list: str})
         });
         let start = await response.json();
-        if (start.mass) {
-            this.list = start.mass;
+        if (start.musics) {
+            this.list = start.musics;
             this.listName = str;
         }
     };

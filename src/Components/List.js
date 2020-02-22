@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MusicTamplate from './MusicTamplate/MusicTamplate';
+import MusicTamplate from './MusicTamplate/MusicTemplate';
 import {inject, observer} from "mobx-react";
 
 class List extends Component {

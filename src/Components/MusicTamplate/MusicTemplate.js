@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from 'react';
-import './MusicTamplate.css';
+import './MusicTemplate.css';
 import {inject, observer} from "mobx-react";
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
@@ -11,7 +11,7 @@ const body = <div className='divm stophover'>
 </div>
 
 
-class MusicTamplate extends PureComponent {
+class MusicTemplate extends PureComponent {
     mainElem = React.createRef();
     state = {
         isProsses: false,
@@ -118,4 +118,4 @@ class MusicTamplate extends PureComponent {
 
 }
 
-export default inject("mainStore")(observer(MusicTamplate));
+export default inject("mainStore")(observer(MusicTemplate));

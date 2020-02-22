@@ -1,10 +1,10 @@
 import './App.css';
-import '../MusicTamplate/MusicTamplate';
+import '../MusicTamplate/MusicTemplate';
 import React, {Component, Fragment} from 'react';
 import List from "../List";
 import Leftblock from "../Leftblock/LeftBlock";
 import Footer from "../Footer/Footer";
-import Header from "../header/Header";
+import Header from "../Header/Header";
 import {inject, observer} from "mobx-react";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';
