@@ -1,5 +1,5 @@
 import './App.css';
-import '../MusicTamplate/MusicTemplate';
+import '../MusicTemplate/MusicTemplate';
 import React, {Component, Fragment} from 'react';
 import List from "../List";
 import Leftblock from "../Leftblock/LeftBlock";
@@ -14,7 +14,7 @@ class App extends Component {
     playerRef = React.createRef();
     footerRef = React.createRef();
     state = {
-        isProsses: false,
+        isProcess: false,
         musicInfo: null,
         sound: true,
         soundVolume: 0.5,
@@ -34,7 +34,7 @@ class App extends Component {
     };
     changeInfo = async (info) => {
         if (info) {
-            await this.setState({
+            this.setState({
                 musicInfo: info
             });
         }
@@ -95,10 +95,10 @@ class App extends Component {
     handleOnclick = () => {
         this.playerRef.current.value = this.state.soundVolume;
         this.progressHandle();
-        if (this.state.isProsses) {
+        if (this.state.isProcess) {
             this.playerRef.current.pause();
             this.setState({
-                isProsses: !this.state.isProsses
+                isProcess: !this.state.isProcess
             })
         } else {
             this.playerRef.current.play().then(() => {
@@ -107,7 +107,7 @@ class App extends Component {
                 console.log('error...', err)
             });
             this.setState({
-                isProsses: !this.state.isProsses
+                isProcess: !this.state.isProcess
             })
         }
     };
@@ -124,7 +124,7 @@ class App extends Component {
                 if (!(this.selectedMusic === some.id)) {
                     this.playerRef.current.pause();
                     this.playerRef.current.src = some.url;
-                    if (!this.isProsses) {
+                    if (!this.isProcess) {
                         this.handleOnclick();
                     }
                     this.changeMusic(some.id);
@@ -134,7 +134,7 @@ class App extends Component {
                         console.log('error...', err)
                     });
                     this.setState({
-                        isProsses: true
+                        isProcess: true
                     })
                 } else {
                     this.handleOnclick();
@@ -285,15 +285,15 @@ class App extends Component {
             };
             document.addEventListener('keydown', (event) => {
                 if (event.code == 'Space') {
-                    if (this.state.isProsses) {
+                    if (this.state.isProcess) {
                         this.playerRef.current.pause();
                         this.setState({
-                            isProsses: !this.state.isProsses
+                            isProcess: !this.state.isProcess
                         })
                     } else {
                         this.playerRef.current.play();
                         this.setState({
-                            isProsses: !this.state.isProsses
+                            isProcess: !this.state.isProcess
                         })
                     }
                 }
@@ -324,7 +324,7 @@ class App extends Component {
                     this.setState({
                         selectedMusic: some.id
                     });
-                    if (!this.isProsses) {
+                    if (!this.isProcess) {
                         this.handleOnclick();
                     }
                     this.changeMusic(some.id);
@@ -334,7 +334,7 @@ class App extends Component {
                         console.log('error...', err)
                     });
                     this.setState({
-                        isProsses: true
+                        isProcess: true
                     })
                 } else {
                     this.handleOnclick();
@@ -364,7 +364,7 @@ class App extends Component {
                     this.setState({
                         selectedMusic: some.id
                     });
-                    if (!this.isProsses) {
+                    if (!this.isProcess) {
                         this.handleOnclick();
                     }
                     this.changeMusic(some.id);
@@ -374,7 +374,7 @@ class App extends Component {
                         console.log('error...', err)
                     });
                     this.setState({
-                        isProsses: true
+                        isProcess: true
                     })
                 } else {
                     this.handleOnclick();
@@ -392,8 +392,8 @@ class App extends Component {
             body: JSON.stringify({id: id})
         });
         let start = await response.json();
-        if (start.mass) {
-            some = start.mass[0];
+        if (start.musics) {
+            some = start.musics[0];
         }
         if (start.message) {
             toast.inf(start.message, {
@@ -405,7 +405,7 @@ class App extends Component {
             this.changeInfo(some);
             this.playerRef.current.pause();
             this.playerRef.current.src = some.url;
-            if (!this.isProsses) {
+            if (!this.isProcess) {
                 this.handleOnclick();
             }
             this.playerRef.current.play().then(() => {
@@ -414,8 +414,8 @@ class App extends Component {
                 console.log('error...', err)
             });
             this.setState({
-                isProsses: true
-            })
+                isProcess: true
+            });
             this.props.mainStore.footerShowTrue();
             this.footerDisplay();
         }
@@ -438,17 +438,17 @@ class App extends Component {
                         <div className="App-header">
                             <div className='childrad'>
                                 <button
-                                    className={'button ' + ((this.state.list === 'playlist') ? 'btndown' : 'btnup')}
+                                    className={'button pointer ' + ((this.state.list === 'playlist') ? 'btndown' : 'btnup')}
                                     onClick={this.playList}
                                 >PlayList
                                 </button>
                                 <button
-                                    className={'button ' + ((this.state.list === 'Popular') ? 'btndown' : 'btnup')}
+                                    className={'button pointer ' + ((this.state.list === 'Popular') ? 'btndown' : 'btnup')}
                                     onClick={this.popularList}
                                 >Popular
                                 </button>
                                 <button
-                                    className={'button ' + ((this.state.list === 'myList') ? 'btndown' : 'btnup')}
+                                    className={'button pointer ' + ((this.state.list === 'myList') ? 'btndown' : 'btnup')}
                                     onClick={this.myList}
                                 >My list
                                 </button>
@@ -457,7 +457,7 @@ class App extends Component {
                                   selectedMusic={this.state.selectedMusic}
                                   changeMusic={this.changeMusic}
                                   handleOnclick={this.handleOnclick}
-                                  isProsses={this.state.isProsses}
+                                  isProcess={this.state.isProcess}
                                   musicInfo={this.state.musicInfo}
                                   changeInfo={this.changeInfo}
                                   footerDisplay={this.footerDisplay}
@@ -491,7 +491,7 @@ class App extends Component {
                 />
             </div>
             {this.props.mainStore.modal ? <AddForm/> : ''}
-            <ToastContainer/>
+            <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}/>
         </Fragment>
     }
 }

@@ -11,7 +11,6 @@ class Playlist extends PureComponent {
 
     render() {
         let finalList;
-        console.log(this.props.mainStore.playlist)
         if (this.props.mainStore.playlist) {
             if(this.props.mainStore.playlist.length !== 0){
                 finalList = this.props.some.map(some => (<Some key={some.id} some={some}

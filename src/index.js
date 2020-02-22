@@ -5,7 +5,7 @@ import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "mobx-react";
 
-import mainStore from "./stores/mainStore";
+import mainStore from "./Stores/mainStore";
 
 const stores = {
     mainStore,

@@ -21,7 +21,7 @@ const fileFilter = (req, file, cb) => {
     } else {
         cb('Тип файла не подходит 1', false);
     }
-}
+};
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -55,7 +55,7 @@ app.post('/api/article', async function (req, res) {
 });
 app.post('/api/some', async function (req, res) {
     let obj = {};
-    console.log('body: ', req.body.list);
+    console.log('body: ', req.body.id);
     if (req.body.id) {
         obj.musics = await Music.findAll({where: {id: req.body.id}});
         res.json(obj);
@@ -80,7 +80,7 @@ app.post('/api/addMusic', async function (req, res, next) {
             musicName: req.body.musicName,
             list: "Popular",
             url: '/music/' + filedata.originalname
-        }
+        };
         await Music.create(musicData).catch(err => console.log(err));
 
     }

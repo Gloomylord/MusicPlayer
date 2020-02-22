@@ -1,15 +1,12 @@
 import {action, observable, decorate} from 'mobx';
 
 class MainStore {
-    show = false;
     footerShow = true;
-    list = 'x';
+    list = null;
     listName = 'Popular';
     modal = false;
     playlist = null;
-    toggleLeftPanel = () => {
-        this.show = !this.show;
-    };
+
     newPlaylist = async () => {
         let response = await fetch('/api/article', {
             method: 'POST',
@@ -85,7 +82,6 @@ class MainStore {
 };
 
 decorate(MainStore, {
-    show: observable,
     footerShow: observable,
     list: observable,
     modal: observable,

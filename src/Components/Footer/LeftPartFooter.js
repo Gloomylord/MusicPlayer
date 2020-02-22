@@ -1,5 +1,5 @@
 import React from "react";
-import './Style.css';
+import './style.css';
 import {inject, observer} from "mobx-react";
 
 function LeftPartFooter(props) {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MusicTamplate from './MusicTamplate/MusicTemplate';
+import MusicTemplate from './MusicTemplate/MusicTemplate';
 import {inject, observer} from "mobx-react";
 
 class List extends Component {
@@ -7,16 +7,16 @@ class List extends Component {
         this.props.mainStore.changeList('Popular');
     }
     render() {
-        let finalList;
-        if (!(this.props.mainStore.list.length === 0) && this.props.mainStore.list !== 'x') {
-            finalList = this.props.mainStore.list.map((some, index) => <MusicTamplate
+        let list;
+        if (this.props.mainStore.list  && this.props.mainStore.list.length !== 0 ) {
+            list = this.props.mainStore.list.map((some, index) => <MusicTemplate
                 key={some.id}
                 index={index}
                 selectedMusic={this.props.selectedMusic}
                 changeMusic={this.props.changeMusic}
                 handleOnclick={this.props.handleOnclick}
                 some={some}
-                isProsses={this.props.state.isProsses}
+                isProcess={this.props.state.isProcess}
                 playerRef={this.props.playerRef}
                 musicInfo={this.props.state.musicInfo}
                 list={this.props.state.list}
@@ -25,23 +25,23 @@ class List extends Component {
                 message={this.props.message}
             />);
         } else {
-            if (this.props.mainStore.list == 'x') {
+            if (!this.props.mainStore.list) {
                 return <div key={this.props.list} className='flexelement row musicList borderList borderRadius jc-c minHeigth'>
                     <div className='flexelement divcenter '>
                         <div className="loader "/>
                     </div>
                 </div>
             }
-            finalList = <div key={this.props.list} className='flexelement row musicList borderList '>
-                <div className='flexelement divcenter'>
-                    Плейлист пока пуст
+            list = <div key={this.props.list} className='flexelement row musicList borderList jc-c minHeigth'>
+                <div className='flexelement divcenter ml-10'>
+                        <div>Плейлист пока пуст</div>
                 </div>
             </div>
         }
 
 
         return <div className='borderRadius scroll'>
-            {finalList}
+            {list}
         </div>
     }
 }

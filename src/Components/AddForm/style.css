@@ -1,4 +1,4 @@
-.modal{
+.modal {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -8,16 +8,18 @@
     flex-direction: column;
     justify-content: center;
 }
-.modalValue{
+
+.modalValue {
     background-color: #2a3754;
     width: 450px;
     border: solid 3px #03065c;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     padding-left: 30px;
     padding-right: 30px;
 }
-.inputAll{
+
+.inputAll {
     background-color: #8fc7ff;
     border-radius: 6px;
     border: solid 2px #3485ed;
@@ -25,50 +27,62 @@
     padding: 4px;
     color: #282c34;
 }
-.txt{
+
+.txt {
     margin-bottom: 20px;
     font-size: 25px;
     color: var(--main-text-color);
 }
-.inputTitle{
+
+.inputTitle {
     color: var(--main-text-color);
     font-size: 20px;
     margin-left: 20px;
 }
-.inputText{
+
+.inputText {
     width: 250px;
     height: 30px;
     margin-right: 20px;
 }
-.flet{
+
+.flet {
     justify-content: space-between;
 }
-.flet1{
+
+.flet1 {
     justify-content: space-around;
 }
-.inputFile{
+
+.inputFile {
     display: flex;
     justify-content: center;
 }
-.inputBtn{
+
+.inputBtn {
     width: 100px;
     padding: 8px;
     font-size: 20px;
+    margin-left: 0;
 }
-.divInput{
+
+.divInput {
     width: 100%;
 }
-.close{
+
+.close {
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
 }
-.closeBtn{
+
+.closeBtn {
     font-size: 20px !important;
     color: var(--main-text-color);
 }
-.selectModal{
+
+.selectModal {
     width: 262px;
-    background-color: #8fc7ff ;
+    background-color: #8fc7ff;
     border-radius: 5px;
     padding: 6px;
     margin-right: 17px;

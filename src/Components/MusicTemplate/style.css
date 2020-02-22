@@ -9,13 +9,21 @@
 .row {
     flex-direction: row;
 }
+
 .musicList {
     width: auto;
 }
-.scroll{
+
+.scroll {
     overflow: auto;
-    max-height:300px ;
+    max-height: 70vh;
+    scrollbar-width: none;
 }
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
 .borderList {
 
     padding: 8px;
@@ -66,12 +74,15 @@
     outline: none;
     margin-left: 10px;
 }
-.stophover:hover :first-child{
+
+.stophover:hover :first-child {
     background-color: aqua;
 }
-.stophover:hover :last-child{
+
+.stophover:hover :last-child {
     background-color: aqua;
 }
+
 .divstop1 {
     outline: none;
     height: 12px;
@@ -92,38 +103,49 @@
     flex-direction: row;
     width: 13.5px;
 }
-.btndown{
+
+.btndown {
     background-color: var(--main-table-color);
 }
-.btnup{
+
+.btnup {
     background-color: var(--main-bg-color);
 }
-.borderRadius{
+
+.borderRadius {
     width: 700px;
-    box-shadow: white 3px 3px 5px;
-    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+    border-radius: var(--main-border-radius);
 }
-.borderRadius > :first-child{
-    border-top-right-radius: 10px;
-    border-top-left-radius:  10px;
+
+.borderRadius > :first-child {
+    border-top-right-radius: var(--main-border-radius);
+    border-top-left-radius: var(--main-border-radius);
 }
-.borderRadius > :last-child{
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius:  10px;
+
+.borderRadius > :last-child {
+    border-bottom-right-radius: var(--main-border-radius);
+    border-bottom-left-radius: var(--main-border-radius);
 }
-.deletefont{
+
+.deletefont {
     margin-left: 6px;
     margin-top: 2px;
     margin-right: 6px;
     font-size: 15px !important;
 }
-.namber{
+
+.number {
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 13px;
+    font-size: 17px;
 }
-.minHeigth{
+
+.minHeigth {
     min-height: 250px;
+}
+.ml-10{
+    margin-left: 10px;
 }
 
 

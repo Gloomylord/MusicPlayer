@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Style.css'
+import './style.css'
 import LeftPartFooter from "./LeftPartFooter";
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.css';
 import '../iconmonstr-iconic-font-1.3.0/css/iconmonstr-iconic-font.min.css';
@@ -8,9 +8,9 @@ import {inject, observer} from "mobx-react";
 
 
 let stop = <div className='divm divcenter'>
-    <div className='divstop'></div>
-    <div className='divstop2'></div>
-    <div className='divstop'></div>
+    <div className='divstop'/>
+    <div className='divstop2'/>
+    <div className='divstop'/>
 </div>;
 let play = <div className='divm divcenter colorneed'>➤</div>;
 
@@ -37,17 +37,16 @@ class Footer extends Component {
             time = '00:00';
         }
         return time;
-    }
-    soundRef = React.createRef();
+    };
 
     render() {
-        let sondon = <i
+        let soundon = <i
             className="im im-volume divcenter pointer footermedia soundmedia"
-            onClick={this.props.soundClick}></i>;
+            onClick={this.props.soundClick}/>;
         let soundoff = <i
             className="im im-volume-off divcenter pointer footermedia soundmedia"
             onClick={this.props.soundClick}
-        ></i>
+        />;
 
         return <div  id='footer'
                      className={'footer footerflex column ' + (!(this.props.mainState.musicDisplay) ? 'none ' : "flexelement ")+(this.props.mainStore.modal?'none':'')}
@@ -58,7 +57,7 @@ class Footer extends Component {
                 <div id='progress' className='musicprogres divcenter '
                      style={{width: '0%'}}
                 >
-                    <div id='progrescircle' className='progrescircle'></div>
+                    <div id='progrescircle' className='progrescircle'/>
                 </div>
             </div>
             <div className='flexelement footerflex footermain'>
@@ -67,7 +66,7 @@ class Footer extends Component {
                     <CenterPartFooter
                         next={this.props.next}
                         handleOnclick={this.props.handleOnclick}
-                        isProsses={this.props.mainState.isProsses}
+                        isProcess={this.props.mainState.isProcess}
                         loop={this.props.loop}
                         isLoop={this.props.mainState.loop}
                         previous={this.props.previous}
@@ -80,9 +79,8 @@ class Footer extends Component {
                         <div className='divcenter footerrigth flexelement row'>
                             {this.props.mainState.musicInfo ? this.time() : ''}
                         </div>
-                        {this.props.mainState.sound ? sondon : soundoff}
+                        {this.props.mainState.sound ? soundon : soundoff}
                         <div id='sound'
-                             ref={this.soundRef}
                              className='sound divcenter pointer rel'
                              onClick={this.props.changeSoundVolume}
                         >
@@ -97,12 +95,12 @@ class Footer extends Component {
                             >
                                 <div id='soundCircle' className='soundCircle divcenter'
                                      style={{left: this.props.mainState.soundVolume * 60 - 6 + 'px'}}
-                                ></div>
+                                />
                             </div>
                         </div>
                         <i className="im im-care-down divcenter pointer footermedia soundmedia ml2"
                            onClick={this.props.mainStore.footerShowFalse}
-                        ></i>
+                        />
                     </div>
                 </div>
             </div>
